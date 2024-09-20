@@ -1,6 +1,7 @@
 // @ts-ignore
 // import { NODE_ENV } from 'process.env';
-import axios from 'axios';
+// import axios from 'axios';
+import { axios } from '@bundled-es-modules/axios';
 import { Ctx } from './types';
 import { Config } from './config';
 

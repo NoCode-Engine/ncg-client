@@ -1,5 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
+// import commonjs from '@rollup/plugin-commonjs';
 import bakedEnv from 'rollup-plugin-baked-env';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
@@ -14,13 +14,13 @@ const terserOptions = {
   format: {
     comments: false,
   },
-  compress: {
+  /* compress: {
     passes: 2,
     drop_console: !devMode, // drop console.log when its not in dev mode
     module: true,
     toplevel: true,
     drop_debugger: !devMode, // drop console.log when its not in dev mode
-  },
+  }, */
 };
 
 const config = [
@@ -38,10 +38,9 @@ const config = [
         sourcemap: true,
       }, */
     ],
-    external: ['axios', 'url'],
+    // external: ['axios'],
     plugins: [
-      resolve(),
-      commonjs(),
+      // commonjs(),
       typescript(),
       terser(terserOptions),
       bakedEnv(
@@ -54,6 +53,7 @@ const config = [
           // compact: true,
         }
       ),
+      resolve(),
     ],
   },
   {
