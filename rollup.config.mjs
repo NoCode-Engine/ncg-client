@@ -1,6 +1,3 @@
-/* import merge from 'deepmerge';
-import { createBasicConfig } from '@open-wc/building-rollup';
- */
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import bakedEnv from 'rollup-plugin-baked-env';
@@ -19,13 +16,10 @@ const terserOptions = {
   },
   compress: {
     passes: 2,
-    drop_console: !devMode,
+    drop_console: !devMode, // drop console.log when its not in dev mode
     module: true,
     toplevel: true,
-    // unsafe_arrows: true,
-    // drop_debugger: !devMode,
-    // unsafe_arrows: true,
-    // drop_debugger: !devMode,
+    drop_debugger: !devMode, // drop console.log when its not in dev mode
   },
 };
 
@@ -44,7 +38,7 @@ const config = [
         sourcemap: true,
       }, */
     ],
-    // external: ['axios', 'os', 'url'],
+    external: ['axios', 'url'],
     plugins: [
       resolve(),
       commonjs(),
@@ -53,6 +47,7 @@ const config = [
       bakedEnv(
         {
           NODE_ENV: process.env.NODE_ENV,
+          NCG_BASE_URL: process.env.NCG_BASE_URL,
         },
         {
           preferConst: true,
@@ -72,30 +67,3 @@ const config = [
 ];
 
 export default config;
-
-/* const baseConfig = createBasicConfig({ terser: terserOptions });
-
-export default merge(baseConfig, {
-  input: './out-tsc/src/main.js',
-  output: {
-    dir: 'dist',
-    format: 'es',
-    // format: 'umd',
-    // format: 'iife',
-    name: 'main',
-    compact: true,
-    sourcemap: true,
-    entryFileNames: 'main.js',
-  },
-  plugins: [
-    bakedEnv(
-      {
-        NODE_ENV: process.env.NODE_ENV,
-      },
-      {
-        preferConst: true,
-        // compact: true,
-      }
-    ),
-  ],
-}); */

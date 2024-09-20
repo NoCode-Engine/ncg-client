@@ -1,5 +1,7 @@
-import * as TestClass from './tester';
-declare const WdlCore: Promise<{
-    tt: typeof TestClass;
-}>;
-export default WdlCore;
+declare const NCGCore: {
+    config: {
+        load: () => Promise<any>;
+    };
+    starwarsAPI: () => Promise<any>;
+};
+export default NCGCore;

@@ -1,2 +1,2 @@
-var e=Object.freeze({__proto__:null,TestClass:class{mathCalc(e){return e.here?"No":"here we go!!!"}}});const o=(async()=>(console.log(["kohn","raffle",222],"dev"),{tt:e}))();export{o as default};
+import t from"axios";const a=(()=>{const a=t.create({timeout:6e4});var e;return{config:(e={httpClient:a},{load:async()=>{const{data:t}=await e.httpClient.get("https://744a-2604-3d09-1887-2200-ce-5943-b5b6-399b.ngrok-free.app/api/scripts/73dec9e6-8ac6-4fac-894b-02bacf271bc4");return t}}),starwarsAPI:async()=>{const{data:a}=await t.get("https://swapi.dev/api/people/1");return a}}})();export{a as default};
 //# sourceMappingURL=ncg.js.map

@@ -1,14 +1,20 @@
 // @ts-ignore
-import { NODE_ENV } from 'process.env';
-import * as TestClass from './tester';
-const WdlCore = (async () => {
-    const strikers = ['kohn', 'raffle', 222];
-    console.log(strikers, NODE_ENV);
+// import { NODE_ENV } from 'process.env';
+import axios from 'axios';
+import { Config } from './config';
+const NCGCore = (() => {
+    const httpClient = axios.create({ timeout: 60000 });
+    const ctx = {
+        httpClient,
+    };
+    const config = Config(ctx);
     return {
-        tt: TestClass,
+        config,
+        starwarsAPI: async () => {
+            const { data } = await axios.get('https://swapi.dev/api/people/1');
+            return data;
+        },
     };
 })();
-export default WdlCore;
-/*
-console.log(announcements.mathCalc()); */
+export default NCGCore;
 //# sourceMappingURL=index.js.map
