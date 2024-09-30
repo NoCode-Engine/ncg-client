@@ -1,25 +1,33 @@
 // @ts-ignore
-// import { NODE_ENV } from 'process.env';
-// import axios from 'axios';
 import { axios } from '@bundled-es-modules/axios';
 import { Ctx } from './types';
 import { Config } from './config';
+import { pagination } from './pagination';
+
+interface INCGCore {
+  init: any;
+  config: Record<string, unknown> | null;
+  pagination: { paginate: (taskId: string, payload: Record<string, any>) => any };
+}
 
 const NCGCore = (() => {
+  let websiteId = '';
   const httpClient = axios.create({ timeout: 60000 });
-
   const ctx: Ctx = {
     httpClient,
   };
 
   const config = Config(ctx);
+
   return {
-    config,
-    starwarsAPI: async () => {
-      const { data } = await axios.get('https://swapi.dev/api/people/1');
-      return data;
+    init: async (siteId: string) => {
+      websiteId = siteId;
+      NCGCore.config = await config.load(siteId); // TODO - Catch, log and rethrow error if config cannot be loaded
+      ctx.websiteId = siteId;
     },
-  };
+    config: null,
+    pagination: pagination(ctx),
+  } as INCGCore;
 })();
 
 export default NCGCore;

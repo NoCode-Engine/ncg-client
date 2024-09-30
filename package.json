@@ -11,7 +11,8 @@
   "types": "ncg.d.ts",
   "scripts": {
     "build": "rimraf dist && tsc && NODE_ENV=dev rollup -c rollup.config.mjs",
-    "build:prod": "rimraf dist && tsc && NODE_ENV=prod rollup -c rollup.config.mjs"
+    "build:prod": "rimraf dist && tsc && NODE_ENV=prod rollup -c rollup.config.mjs",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
@@ -19,6 +20,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "dotenv": "^16.4.5",
+    "husky": "^9.1.6",
     "rimraf": "^6.0.1",
     "rollup": "^3.21.0",
     "rollup-plugin-baked-env": "^1.0.1",

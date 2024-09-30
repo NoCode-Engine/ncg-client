@@ -4,9 +4,9 @@ import { Ctx } from './types';
 
 export const Config = (context: Ctx) => {
   return {
-    load: async () => {
-      const { data } = await context.httpClient.get(`${NCG_BASE_URL}/scripts/73dec9e6-8ac6-4fac-894b-02bacf271bc4`);
-      console.log({ data });
+    load: async (siteId: string) => {
+      if (!siteId) throw new Error('missing siteId, please provide one!');
+      const { data } = await context.httpClient.get(`${NCG_BASE_URL}/scripts/${siteId}`);
       return data;
     },
   };
