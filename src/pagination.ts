@@ -12,7 +12,7 @@ export const pagination = (ctx: Ctx) => {
   const records: Record<string, MemoizedRecords> = {};
   return {
     paginate: async (taskId: string, payload: { type: string; pageNumber: string }) => {
-      if (records[payload.pageNumber]) {
+      if (records[payload.pageNumber] != null) {
         return records[payload.pageNumber];
       }
 
