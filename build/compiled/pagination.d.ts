@@ -1,14 +1,9 @@
 import { Ctx } from './types';
-interface MemoizedRecords {
-    offset: string;
-    results: any[];
-    taskId: string;
-}
 export declare const pagination: (ctx: Ctx) => {
     paginate: (taskId: string, payload: {
         type: string;
         pageNumber: string;
-    }) => Promise<MemoizedRecords | {
+    }) => Promise<{
         data: any;
         error: null;
         results?: undefined;
@@ -18,4 +13,3 @@ export declare const pagination: (ctx: Ctx) => {
         data?: undefined;
     }>;
 };
-export {};

@@ -6,7 +6,7 @@ export const pagination = (ctx) => {
         paginate: async (taskId, payload) => {
             console.log({ records, taskId, payload }, 'entering function');
             if (records[payload.pageNumber] != null) {
-                return records[payload.pageNumber];
+                return { data: records[payload.pageNumber], error: null };
             }
             let offset = null;
             if (payload.pageNumber !== '1') {
