@@ -4,7 +4,8 @@ export const pagination = (ctx) => {
     const records = {};
     return {
         paginate: async (taskId, payload) => {
-            if (records[payload.pageNumber]) {
+            console.log({ records, taskId, payload }, 'entering function');
+            if (records[payload.pageNumber] != null) {
                 return records[payload.pageNumber];
             }
             let offset = null;
@@ -21,6 +22,7 @@ export const pagination = (ctx) => {
             if (offset) {
                 data.pageNumber = offset;
             }
+            console.log({ newRecord: records, data }, 'calling API');
             try {
                 const res = await ctx.httpClient.post(`${NCG_BASE_URL}/tasks/${taskId}`, data, {
                     headers: {
