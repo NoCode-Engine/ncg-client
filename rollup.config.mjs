@@ -19,7 +19,7 @@ const terserOptions = {
     // drop_console: !devMode, // drop console.log when its not in dev mode
     module: true,
     toplevel: true,
-    drop_debugger: !devMode, // drop console.log when its not in dev mode
+    // drop_debugger: !devMode, // drop console.log when its not in dev mode
   },
 };
 
