@@ -1,6 +1,6 @@
-import { Ctx } from './types';
+import { Ctx } from "./types";
 // @ts-ignore
-import { NCG_BASE_URL } from 'process.env';
+import { NCG_BASE_URL } from "process.env";
 
 interface MemoizedRecords {
   offset: string;
@@ -11,14 +11,18 @@ interface MemoizedRecords {
 export const pagination = (ctx: Ctx) => {
   const records: Record<string, MemoizedRecords> = {};
   return {
-    paginate: async (taskId: string, payload: { type: string; pageNumber: string }) => {
-      console.log({ records, taskId, payload }, 'entering function');
+    paginate: async (
+      taskId: string,
+      payload: { type: string; pageNumber: string }
+    ) => {
+      // @ts-ignore
+      console.log({ records, taskId, payload }, "entering function");
       if (records[payload.pageNumber] != null) {
         return { data: records[payload.pageNumber], error: null };
       }
 
       let offset = null;
-      if (payload.pageNumber !== '1') {
+      if (payload.pageNumber !== "1") {
         let newPageNum = Number.parseInt(payload.pageNumber, 10);
         --newPageNum;
         if (records[newPageNum.toString()]) {
@@ -26,19 +30,24 @@ export const pagination = (ctx: Ctx) => {
         }
       }
       const data: any = {
-        type: 'pagination',
+        type: "pagination",
       };
 
       if (offset) {
         data.pageNumber = offset;
       }
-      console.log({ newRecord: records, data }, 'calling API');
+      // @ts-ignore
+      console.log({ newRecord: records, data }, "calling API");
       try {
-        const res = await ctx.httpClient.post(`${NCG_BASE_URL}/tasks/${taskId}`, data, {
-          headers: {
-            'X-AppId': ctx.websiteId,
-          },
-        });
+        const res = await ctx.httpClient.post(
+          `${NCG_BASE_URL}/tasks/${taskId}`,
+          data,
+          {
+            headers: {
+              "X-AppId": ctx.websiteId,
+            },
+          }
+        );
 
         const response = res.data;
 
@@ -49,7 +58,7 @@ export const pagination = (ctx: Ctx) => {
         return { data: response, error: null };
       } catch (e) {
         // TODO - Log error remotely so user can see it on dashboard
-        return { results: [], error: 'Error occurred fetching data' };
+        return { results: [], error: "Error occurred fetching data" };
       }
     },
   };

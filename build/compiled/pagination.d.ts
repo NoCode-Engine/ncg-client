@@ -1,4 +1,4 @@
-import { Ctx } from './types';
+import { Ctx } from "./types";
 export declare const pagination: (ctx: Ctx) => {
     paginate: (taskId: string, payload: {
         type: string;
